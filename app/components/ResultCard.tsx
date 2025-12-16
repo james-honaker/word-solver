@@ -6,9 +6,11 @@ type ResultCardProps = {
     length: number;
     words: { word: string; score: number }[];
     index: number;
+    thresholdGood: number;
+    thresholdGreat: number;
 };
 
-export default function ResultCard({ length, words, index }: ResultCardProps) {
+export default function ResultCard({ length, words, index, thresholdGood, thresholdGreat }: ResultCardProps) {
     return (
         <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -30,7 +32,10 @@ export default function ResultCard({ length, words, index }: ResultCardProps) {
                         className="bg-slate-800/50 hover:bg-violet-600/20 text-slate-200 hover:text-white px-3 py-1.5 rounded-lg border border-white/5 text-lg font-medium tracking-wide transition-all cursor-default select-all flex items-baseline gap-0.5 group relative pr-5"
                     >
                         {item.word}
-                        <span className={`text-[9px] font-bold absolute bottom-1 right-1.5 ${item.score >= 15 ? 'text-amber-400' : 'text-slate-500 group-hover:text-violet-300'}`}>
+                        <span className={`text-[9px] font-bold absolute bottom-1 right-1.5 ${item.score >= thresholdGreat ? 'text-amber-400' :
+                                item.score >= thresholdGood ? 'text-teal-400' :
+                                    'text-slate-500 group-hover:text-violet-300'
+                            }`}>
                             {item.score}
                         </span>
                     </motion.div>
