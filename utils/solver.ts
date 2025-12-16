@@ -6,7 +6,13 @@ const LETTER_SCORES: { [key: string]: number } = {
     n: 1, o: 1, p: 3, q: 10, r: 1, s: 1, t: 1, u: 1, v: 4, w: 4, x: 8, y: 4, z: 10
 };
 
-export function solve(letters: string, dictionary: string[]): WordResult[] {
+export type FilterOptions = {
+    startsWith?: string;
+    endsWith?: string;
+    contains?: string;
+};
+
+export function solve(letters: string, dictionary: string[], filters?: FilterOptions): WordResult[] {
     if (!letters || letters.length === 0) {
         return [];
     }
@@ -16,11 +22,21 @@ export function solve(letters: string, dictionary: string[]): WordResult[] {
     const wildcards = (cleanLetters.match(/\?/g) || []).length;
     const inputMap = getFrequencyMap(cleanLetters.replace(/\?/g, ''));
 
+    // Normalize filters
+    const startPattern = filters?.startsWith?.toLowerCase().trim();
+    const endPattern = filters?.endsWith?.toLowerCase().trim();
+    const containsPattern = filters?.contains?.toLowerCase().trim();
+
     const foundWords: WordResult[] = [];
 
     for (const word of dictionary) {
         // Optimization: Skip words longer than input + wildcards
         if (word.length > cleanLetters.length || word.length < 2) continue;
+
+        // Apply Filters (Fastest checks first)
+        if (startPattern && !word.startsWith(startPattern)) continue;
+        if (endPattern && !word.endsWith(endPattern)) continue;
+        if (containsPattern && !word.includes(containsPattern)) continue;
 
         const wordMap = getFrequencyMap(word);
 
