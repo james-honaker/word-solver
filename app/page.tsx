@@ -3,6 +3,7 @@ import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import InputArea from './components/InputArea';
 import ResultCard from './components/ResultCard';
+import DefinitionModal from './components/DefinitionModal';
 
 type WordResult = {
   word: string;
@@ -18,6 +19,7 @@ export default function Home() {
   const [results, setResults] = useState<WordResult[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const [selectedWord, setSelectedWord] = useState<string | null>(null);
 
   const handleSolve = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -124,10 +126,20 @@ export default function Home() {
                 index={index}
                 thresholdGood={thresholdGood}
                 thresholdGreat={thresholdGreat}
+                onWordClick={setSelectedWord}
               />
             ))}
           </AnimatePresence>
         </div>
+
+        <AnimatePresence>
+          {selectedWord && (
+            <DefinitionModal
+              word={selectedWord}
+              onClose={() => setSelectedWord(null)}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </main>
   );

@@ -3,6 +3,14 @@
 :root {
   --background: #0f172a;
   --foreground: #f8fafc;
+
+  /* Score Colors */
+  --score-great: #fbbf24;
+  /* amber-400 */
+  --score-good: #2dd4bf;
+  /* teal-400 */
+  --score-avg: #64748b;
+  /* slate-500 */
 }
 
 body {
