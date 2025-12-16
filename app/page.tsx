@@ -57,6 +57,11 @@ export default function Home() {
     .map(Number)
     .sort((a, b) => b - a);
 
+  // Calculate scoring thresholds (Dynamic Percentiles)
+  const allScores = results ? results.map(r => r.score).sort((a, b) => a - b) : [];
+  const thresholdGreat = allScores.length > 0 ? allScores[Math.floor(allScores.length * 0.8)] : 0;
+  const thresholdGood = allScores.length > 0 ? allScores[Math.floor(allScores.length * 0.5)] : 0;
+
   return (
     <main className="min-h-screen py-20 px-4">
       <div className="max-w-4xl mx-auto text-center space-y-12">
@@ -117,6 +122,8 @@ export default function Home() {
                 length={len}
                 words={groupedResults[len]}
                 index={index}
+                thresholdGood={thresholdGood}
+                thresholdGreat={thresholdGreat}
               />
             ))}
           </AnimatePresence>
