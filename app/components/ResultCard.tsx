@@ -34,7 +34,7 @@ export default function ResultCard({ length, words, index, thresholdGood, thresh
                         className="bg-slate-800/50 hover:bg-violet-600/20 text-slate-200 hover:text-white px-3 py-1.5 rounded-lg border border-white/5 text-lg font-medium tracking-wide transition-all cursor-pointer select-none flex items-baseline gap-0.5 group relative pr-5"
                     >
                         {item.word}
-                        <span className={`text-[9px] font-bold absolute bottom-1 right-1.5 ${item.score >= thresholdGreat ? 'text-[var(--score-great)]' :
+                        <span className={`text-[10px] font-bold absolute bottom-1 right-1.5 ${item.score >= thresholdGreat ? 'text-[var(--score-great)]' :
                             item.score >= thresholdGood ? 'text-[var(--score-good)]' :
                                 'text-[var(--score-avg)] group-hover:text-violet-300'
                             }`}>

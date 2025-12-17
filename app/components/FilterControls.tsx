@@ -33,7 +33,7 @@ export default function FilterControls({ filters, setFilters }: FilterControlsPr
         <div className="w-full max-w-lg mx-auto mb-2 text-right">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-violet-400 transition-colors py-2 px-1"
+                className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-violet-400 transition-colors py-3 px-2 min-h-[44px]"
             >
                 <Filter size={14} />
                 <span>{isOpen ? 'Hide Filters' : 'Advanced Filters'}</span>
@@ -97,7 +97,7 @@ function CompactInput({ label, value, onChange, placeholder, reverse }: { label:
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
-                className={`w-full bg-slate-900/50 border border-white/10 rounded-md py-1.5 pl-2 pr-2 text-sm text-white placeholder-slate-700 focus:outline-none focus:ring-1 focus:ring-violet-500/50 transition-all uppercase ${reverse ? 'text-right' : ''}`}
+                className={`w-full bg-slate-900/50 border border-white/10 rounded-md py-2.5 sm:py-1.5 pl-3 pr-3 text-base sm:text-sm text-white placeholder-slate-700 focus:outline-none focus:ring-1 focus:ring-violet-500/50 transition-all uppercase ${reverse ? 'text-right' : ''}`}
             />
             <span className="absolute -top-3 left-1 text-[9px] font-bold text-slate-500 uppercase tracking-wider group-focus-within:text-violet-400 transition-colors">
                 {label}
