@@ -91,7 +91,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="space-y-4"
         >
-          <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-fuchsia-400 to-teal-400 pb-2">
+          <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-fuchsia-400 to-teal-400 pb-2">
             Word Solver
           </h1>
           <p className="text-slate-400 text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
