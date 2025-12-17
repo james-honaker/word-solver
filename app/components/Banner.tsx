@@ -18,7 +18,7 @@ export default function Banner() {
             </div>
 
             <div className="flex gap-6">
-                <span className="text-slate-400 font-medium text-sm uppercase tracking-widest">Word Solver</span>
+                <span className="hidden sm:block text-slate-400 font-medium text-sm uppercase tracking-widest">Word Solver</span>
             </div>
         </nav>
     );

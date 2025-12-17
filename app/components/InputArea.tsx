@@ -29,7 +29,7 @@ export default function InputArea({ letters, loading, setLetters, handleSolve, f
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setLetters(e.target.value.replace(/[^a-zA-Z?]/g, ''))}
                         placeholder="Enter letters (use ? for wildcard)"
                         maxLength={15}
-                        className="w-full py-4 pl-6 pr-14 text-2xl font-bold text-center tracking-[0.2em] uppercase bg-white/5 border-2 border-white/10 rounded-full focus:outline-none focus:border-violet-500 focus:bg-white/10 transition-all placeholder:text-slate-500 placeholder:text-lg placeholder:normal-case placeholder:tracking-normal text-white shadow-xl backdrop-blur-sm"
+                        className="w-full py-3 md:py-4 pl-4 md:pl-6 pr-12 md:pr-14 text-xl md:text-2xl font-bold text-center tracking-widest md:tracking-[0.2em] uppercase bg-white/5 border-2 border-white/10 rounded-full focus:outline-none focus:border-violet-500 focus:bg-white/10 transition-all placeholder:text-slate-500 placeholder:text-sm md:placeholder:text-lg placeholder:normal-case placeholder:tracking-normal text-white shadow-xl backdrop-blur-sm"
                     />
                     <button
                         type="submit"
