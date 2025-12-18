@@ -3,9 +3,9 @@ import "./globals.css";
 
 export const metadata = {
     title: "Word Solver",
-    description: "Unscramble your words with Antigravity",
+    description: "Unscramble your words with Word Solver",
     icons: {
-        icon: '/logo-dark.png',
+        icon: '/app-icon.png',
         apple: '/app-icon.png',
     },
     manifest: '/manifest.json',
