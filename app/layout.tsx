@@ -6,7 +6,16 @@ export const metadata = {
     description: "Unscramble your words with Antigravity",
     icons: {
         icon: '/logo-dark.png',
+        apple: '/logo-dark.png',
     },
+    manifest: '/manifest.json',
+};
+
+export const viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    themeColor: '#0f172a',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
