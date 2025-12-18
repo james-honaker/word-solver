@@ -6,7 +6,7 @@ export const metadata = {
     description: "Unscramble your words with Antigravity",
     icons: {
         icon: '/logo-dark.png',
-        apple: '/logo-dark.png',
+        apple: '/app-icon.png',
     },
     manifest: '/manifest.json',
 };
