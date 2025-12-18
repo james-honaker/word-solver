@@ -81,7 +81,7 @@ export default function Home() {
   const thresholdGood = allScores.length > 0 ? allScores[Math.floor(allScores.length * 0.5)] : 0;
 
   return (
-    <main className="min-h-screen py-20 px-4">
+    <main className="min-h-screen pt-24 pb-10 px-4">
       <div className="max-w-4xl mx-auto text-center space-y-12">
 
         {/* Header Section */}
