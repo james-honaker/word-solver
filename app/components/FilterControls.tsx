@@ -97,7 +97,7 @@ function CompactInput({ label, value, onChange, placeholder, reverse }: { label:
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder}
-                className={`w-full bg-slate-900/50 border border-white/10 rounded-md py-2.5 sm:py-1.5 pl-3 pr-3 text-base sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-violet-500/50 transition-all uppercase ${reverse ? 'sm:text-right' : ''}`}
+                className={`w-full bg-slate-900/50 border border-white/10 rounded-md py-2.5 sm:py-1.5 pl-3 pr-3 text-base sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-violet-500/50 transition-all uppercase ${reverse ? 'sm:text-right' : ''}`}
             />
             <span className="absolute -top-3 left-1 text-[9px] font-bold text-slate-500 uppercase tracking-wider group-focus-within:text-violet-400 transition-colors">
                 {label}
