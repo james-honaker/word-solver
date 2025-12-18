@@ -81,21 +81,21 @@ export default function Home() {
   const thresholdGood = allScores.length > 0 ? allScores[Math.floor(allScores.length * 0.5)] : 0;
 
   return (
-    <main className="min-h-screen pt-24 pb-10 px-4">
-      <div className="max-w-4xl mx-auto text-center space-y-12">
+    <main className="min-h-screen pt-20 pb-10 px-4">
+      <div className="max-w-4xl mx-auto text-center space-y-8">
 
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="space-y-4"
+          className="space-y-2 pt-4"
         >
-          <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-fuchsia-400 to-teal-400 pb-2">
+          <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-violet-400 to-fuchsia-400 pb-2 tracking-tight drop-shadow-sm">
             Word Solver
           </h1>
-          <p className="text-slate-400 text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
-            Unscramble your potential using our high-speed algorithm.
+          <p className="text-slate-400 text-lg md:text-xl max-w-lg mx-auto leading-relaxed font-medium">
+            Find every word. Maximize every score.
           </p>
         </motion.div>
 
