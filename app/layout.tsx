@@ -4,10 +4,6 @@ import "./globals.css";
 export const metadata = {
     title: "Word Solver",
     description: "Unscramble your words with Word Solver",
-    icons: {
-        icon: '/app-icon.png',
-        apple: '/app-icon.png',
-    },
     manifest: '/manifest.json',
 };
 
