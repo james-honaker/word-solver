@@ -3,6 +3,8 @@ import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import InputArea from './components/InputArea';
 import ResultCard from './components/ResultCard';
+import DefinitionModal from './components/DefinitionModal';
+import FilterControls, { FilterState } from './components/FilterControls';
 
 type WordResult = {
   word: string;
@@ -18,6 +20,8 @@ export default function Home() {
   const [results, setResults] = useState<WordResult[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
+  const [selectedWord, setSelectedWord] = useState<string | null>(null);
+  const [filters, setFilters] = useState<FilterState>({ startsWith: '', endsWith: '', contains: '' });
 
   const handleSolve = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +32,7 @@ export default function Home() {
     setResults(null);
 
     try {
+      // Fetch all valid words (ignore filters on server for dynamic client filtering)
       const res = await fetch('/api/solve', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -44,8 +49,21 @@ export default function Home() {
     }
   };
 
+  // Apply filters client-side
+  const filteredResults = results ? results.filter(item => {
+    const word = item.word.toLowerCase();
+    const start = filters.startsWith.toLowerCase();
+    const end = filters.endsWith.toLowerCase();
+    const has = filters.contains.toLowerCase();
+
+    if (start && !word.startsWith(start)) return false;
+    if (end && !word.endsWith(end)) return false;
+    if (has && !word.includes(has)) return false;
+    return true;
+  }) : null;
+
   // Group words by length
-  const groupedResults: GroupedResults = results ? results.reduce((acc: GroupedResults, item: WordResult) => {
+  const groupedResults: GroupedResults = filteredResults ? filteredResults.reduce((acc: GroupedResults, item: WordResult) => {
     const len = item.word.length;
     if (!acc[len]) acc[len] = [];
     acc[len].push(item);
@@ -56,6 +74,11 @@ export default function Home() {
   const sortedLengths = Object.keys(groupedResults)
     .map(Number)
     .sort((a, b) => b - a);
+
+  // Calculate scoring thresholds (Dynamic Percentiles)
+  const allScores = results ? results.map(r => r.score).sort((a, b) => a - b) : [];
+  const thresholdGreat = allScores.length > 0 ? allScores[Math.floor(allScores.length * 0.8)] : 0;
+  const thresholdGood = allScores.length > 0 ? allScores[Math.floor(allScores.length * 0.5)] : 0;
 
   return (
     <main className="min-h-screen py-20 px-4">
@@ -68,7 +91,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="space-y-4"
         >
-          <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-fuchsia-400 to-teal-400 pb-2">
+          <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-fuchsia-400 to-teal-400 pb-2">
             Word Solver
           </h1>
           <p className="text-slate-400 text-lg md:text-xl max-w-lg mx-auto leading-relaxed">
@@ -77,11 +100,14 @@ export default function Home() {
         </motion.div>
 
         {/* Input Section */}
+        {/* Input Section */}
         <InputArea
           letters={letters}
           loading={loading}
           setLetters={setLetters}
           handleSolve={handleSolve}
+          filters={filters}
+          setFilters={setFilters}
         />
 
         {/* Error Message */}
@@ -117,10 +143,22 @@ export default function Home() {
                 length={len}
                 words={groupedResults[len]}
                 index={index}
+                thresholdGood={thresholdGood}
+                thresholdGreat={thresholdGreat}
+                onWordClick={setSelectedWord}
               />
             ))}
           </AnimatePresence>
         </div>
+
+        <AnimatePresence>
+          {selectedWord && (
+            <DefinitionModal
+              word={selectedWord}
+              onClose={() => setSelectedWord(null)}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </main>
   );

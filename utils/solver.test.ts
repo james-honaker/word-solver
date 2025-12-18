@@ -47,4 +47,31 @@ describe('Solver Logic', () => {
     it('returns empty array for empty input', () => {
         expect(solve('', dictionary)).toEqual([]);
     });
+
+    it('filters results by startsWith', () => {
+        const results = solve('act', dictionary, { startsWith: 'c' });
+        expect(results.map(r => r.word)).toEqual(['cat']);
+    });
+
+    it('filters results by endsWith', () => {
+        const results = solve('act', dictionary, { endsWith: 't' });
+        const words = results.map(r => r.word);
+        expect(words).toContain('cat');
+        expect(words).toContain('act');
+        expect(words).not.toContain('dog');
+        // 'ant' checks removed as 'act' cannot form 'ant' directly
+    });
+
+    it('filters results by contains', () => {
+        // "quartz" from "quartz". contains "z".
+        const results = solve('quartz', dictionary, { contains: 'z' });
+        expect(results.map(r => r.word)).toEqual(['quartz']);
+    });
+
+    it('combines filters correctly', () => {
+        // 'quartz' input. Dict has 'quartz'.
+        // starts with q, ends with z.
+        const results = solve('quartz', dictionary, { startsWith: 'q', endsWith: 'z' });
+        expect(results.map(r => r.word)).toEqual(['quartz']);
+    });
 });

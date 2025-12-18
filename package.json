@@ -1,11 +1,12 @@
 {
   "name": "word-solver",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "vitest"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",
